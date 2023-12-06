@@ -1,7 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
 // Middleware for parsing JSON bodies
+app.use(cors());
 app.use(express.json());
 
 // Middleware to simulate a 3-second delay and randomly throw a 500 error
