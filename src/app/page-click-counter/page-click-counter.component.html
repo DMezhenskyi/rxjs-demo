@@ -1,0 +1,72 @@
+<section class="app-description">
+  <div>
+    <h1>Page Click Counter</h1>
+    <p>Start clicking around the page...</p>
+  </div>
+  <mat-slide-toggle
+    (click)="$event.stopPropagation()"
+    [checked]="autoSave"
+    (change)="autoSave = $event.checked"
+  >Auto-Save</mat-slide-toggle>
+  <button (click)="
+    $event.stopPropagation();
+    saveTrigger.next('manual')"
+    mat-raised-button
+    color="accent"
+  >Save State</button>
+</section>
+<section class="counter">
+  <div class="left-clicks">
+    <h3>Clicks on Left Page Side</h3>
+    <p>
+      Total: <strong>{{ leftSideClickCounter$ | async }} times</strong>
+    </p>
+  </div>
+  <mat-divider vertical />
+  <div class="right-clicks">
+    <h3>Clicks on Right Page Side</h3>
+    <p>
+      Total: <strong>{{ rightSideClickCounter$ | async }} times</strong>
+    </p>
+  </div>
+</section>
+<section class="last-click-tracker">
+  <h3>Last Clicked was</h3>
+  <p>
+    <strong>"{{ lastSideClicked$ | async | titlecase }}"</strong> Side
+  </p>
+</section>
+@if (stateSavedOnServer$ | async; as serverState) {
+  @switch (serverState.status) {
+    @case ('success') {
+      <div class="success-message">
+        <h4>Saved On Server:</h4>
+        <ul>
+          <li>
+            Trigger: <strong>{{ serverState.data?.trigger | titlecase }}</strong>
+          </li>
+          <li>
+            Left-Side Clicks:
+            <strong>{{ serverState.data?.data?.leftSideClicks }}</strong>
+          </li>
+          <li>
+            Right-Side Clicks:
+            <strong>{{ serverState.data?.data?.rightSideClicks }}</strong>
+          </li>
+        </ul>
+      </div>
+    }
+    @case ('error') {
+      <p class="error-message">
+        <span>Data could not be saved...</span>
+        <button mat-button (click)="
+          $event.stopPropagation();
+          saveTrigger.next('manual')"
+        >replay</button>
+      </p>
+    }
+    @case ('loading') {
+      <mat-progress-bar class="progress-bar" mode="buffer" />
+    }
+  }
+}
