@@ -1,3 +1,14 @@
+.app-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h1 {
+    margin-bottom: 5px;
+  }
+  p {
+    margin-top: 0;
+  }
+}
 .counter {
   background-color: #fafafa;
   border-radius: 5px;
