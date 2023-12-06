@@ -1,0 +1,54 @@
+.app-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h1 {
+    margin-bottom: 5px;
+  }
+  p {
+    margin-top: 0;
+  }
+}
+.counter {
+  background-color: #fafafa;
+  border-radius: 5px;
+  padding: 5px 15px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.last-click-tracker {
+  text-align: center;
+}
+mat-divider {
+  height: 70px;
+}
+.error-message {
+  background: #ffcece;
+  padding: 5px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.success-message {
+  background: #c6f8c6;
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  h4 {
+    margin-bottom: 5px;
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+    margin-top: 0;
+  }
+}

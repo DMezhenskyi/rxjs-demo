@@ -1,0 +1,54 @@
+<section class="app-description">
+  <div>
+    <h1>Page Click Counter</h1>
+    <p>Start clicking around the page...</p>
+  </div>
+  <mat-slide-toggle 
+    [checked]="autoSave"
+    (change)="autoSave = $event.checked"
+  >Auto-Save</mat-slide-toggle>
+  <button mat-raised-button color="accent">Save State</button>
+</section>
+<section class="counter">
+  <div class="left-clicks">
+    <h3>Clicks on Left Page Side</h3>
+    <p>
+      Total: <strong>{{ 0 }} times</strong>
+    </p>
+  </div>
+  <mat-divider vertical />
+  <div class="right-clicks">
+    <h3>Clicks on Right Page Side</h3>
+    <p>
+      Total: <strong>{{ 0 }} times</strong>
+    </p>
+  </div>
+</section>
+<section class="last-click-tracker">
+  <h3>Last Clicked was</h3>
+  <p>
+    <strong>"{{ "UNKNOWN" | titlecase }}"</strong> Side
+  </p>
+</section>
+
+  <!-- <div class="success-message">
+    <h4>Saved On Server:</h4>
+    <ul>
+      <li>
+        Save Trigger: {{ 'TO DO' }}
+      </li>
+      <li>
+        Left-Side Clicks:
+        <strong>{{ 'TO DO' }}</strong>
+      </li>
+      <li>
+        Right-Side Clicks:
+        <strong>{{ 'TO DO' }}</strong>
+      </li>
+    </ul>
+  </div> -->
+
+  <!-- <p class="error-message">
+    <span>Data could not be saved...</span>
+    <button mat-button>replay</button>
+  </p> -->
