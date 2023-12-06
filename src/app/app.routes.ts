@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { LikeDislikeDemoComponent } from './like-dislike-demo/like-dislike-demo.component';
+import { PageClickCounterComponent } from './page-click-counter/page-click-counter.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LikeDislikeDemoComponent,
+    component: PageClickCounterComponent,
   },
 ];

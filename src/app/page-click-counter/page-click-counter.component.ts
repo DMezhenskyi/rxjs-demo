@@ -4,7 +4,7 @@ import { MatDividerModule } from '@angular/material/divider';
 @Component({
   standalone: true,
   imports: [MatDividerModule],
-  templateUrl: './like-dislike-demo.component.html',
-  styleUrl: './like-dislike-demo.component.scss',
+  templateUrl: './page-click-counter.component.html',
+  styleUrl: './page-click-counter.component.scss',
 })
-export class LikeDislikeDemoComponent {}
+export class PageClickCounterComponent {}
