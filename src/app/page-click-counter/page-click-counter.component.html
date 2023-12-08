@@ -3,6 +3,10 @@
     <h1>Page Click Counter</h1>
     <p>Start clicking around the page...</p>
   </div>
+  <mat-slide-toggle 
+    [checked]="autoSave"
+    (change)="autoSave = $event.checked"
+  >Auto-Save</mat-slide-toggle>
   <button mat-raised-button color="accent">Save State</button>
 </section>
 <section class="counter">

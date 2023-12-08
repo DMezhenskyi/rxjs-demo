@@ -1,15 +1,23 @@
 import { Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TitleCasePipe } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [MatDividerModule, MatButtonModule, TitleCasePipe],
+  imports: [
+    MatDividerModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    TitleCasePipe
+  ],
   templateUrl: './page-click-counter.component.html',
   styleUrl: './page-click-counter.component.scss',
 })
 export class PageClickCounterComponent {
+
+  autoSave = false;
 
   /** 1. Create an Observable of page clicks: clicks$ */ 
   /** 2. Use the Observable above to create 2 others: */
