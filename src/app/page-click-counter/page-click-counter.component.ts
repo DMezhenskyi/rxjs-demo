@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [MatDividerModule, MatButtonModule],
+  imports: [MatDividerModule, MatButtonModule, TitleCasePipe],
   templateUrl: './page-click-counter.component.html',
   styleUrl: './page-click-counter.component.scss',
 })
