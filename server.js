@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const throwRandomlyErrors = false;
+const throwRandomlyErrors = true;
 
 // Middleware for parsing JSON bodies
 app.use(cors());
