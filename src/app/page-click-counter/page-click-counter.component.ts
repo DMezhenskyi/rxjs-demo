@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
-import { Subject, filter, fromEvent, map, merge, pipe, scan, shareReplay, startWith, switchMap, tap, withLatestFrom } from 'rxjs';
+import { Subject, catchError, filter, fromEvent, map, merge, of, pipe, scan, shareReplay, startWith, switchMap, tap, withLatestFrom } from 'rxjs';
 import { DataService } from '../data.service';
 
 @Component({
@@ -47,8 +47,15 @@ export class PageClickCounterComponent {
   saveTrigger = new Subject<'manual' | 'autosave'>();
 
   stateSavedOnServer$ = this.saveTrigger.asObservable().pipe(
-    withLatestFrom(this.leftSideClickCounter$, this.rightSideClickCounter$),
-    switchMap((state) => this.#data.save$(state)),
+    withLatestFrom(
+      this.leftSideClickCounter$,
+      this.rightSideClickCounter$
+    ),
+    switchMap((state) => 
+      this.#data.save$(state).pipe(
+        catchError(err => of(err))
+      )
+    ),
     shareReplay()
   );
   

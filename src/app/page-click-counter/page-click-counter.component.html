@@ -43,15 +43,15 @@
         <h4>Saved On Server:</h4>
         <ul>
           <li>
-            Trigger: <strong>{{ serverState.data.trigger | titlecase }}</strong>
+            Trigger: <strong>{{ serverState.data?.trigger | titlecase }}</strong>
           </li>
           <li>
             Left-Side Clicks:
-            <strong>{{ serverState.data.data.leftSideClicks }}</strong>
+            <strong>{{ serverState.data?.data?.leftSideClicks }}</strong>
           </li>
           <li>
             Right-Side Clicks:
-            <strong>{{ serverState.data.data.rightSideClicks }}</strong>
+            <strong>{{ serverState.data?.data?.rightSideClicks }}</strong>
           </li>
         </ul>
       </div>

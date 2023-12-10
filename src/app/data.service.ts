@@ -1,6 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { catchError, map, of, retry, startWith } from 'rxjs';
+import { catchError, map, of, retry, startWith, tap, throwError } from 'rxjs';
+
+export interface Response {
+  message: string;
+  data: RequestData;
+};
+export interface State {
+  leftSideClicks: number; 
+  rightSideClicks: number;
+}
+export interface RequestData {
+  trigger: 'manual' | 'autosave';
+  data: State | null;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +22,9 @@ export class DataService {
 
   #http = inject(HttpClient);
 
-  save$([trigger, leftSideClicks, rightSideClicks]: [string, number, number]) {
-    const dataToSave = { trigger, data: { leftSideClicks, rightSideClicks }};
-    return this.#http.post<{data: any}>(`http://localhost:3000/save`, dataToSave)
+  save$([trigger, leftSideClicks, rightSideClicks]: [RequestData['trigger'], number, number]) {
+    const dataToSave: RequestData = { trigger, data: { leftSideClicks, rightSideClicks }};
+    return this.#http.post<Response>(`http://localhost:3000/save`, dataToSave)
       .pipe(
         map(response => ({
           status: 'success',
@@ -21,14 +34,14 @@ export class DataService {
           count: 3,
           delay: 1000
         }),
-        catchError(() => of({
+        catchError(() => throwError(() => ({
           status: 'error',
           data: null
-        })),
+        }))),
         startWith({
           status: 'loading',
           data: null
-        })
+        }) 
       )
   }
 }
