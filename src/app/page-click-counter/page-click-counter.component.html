@@ -19,24 +19,24 @@
   <div class="left-clicks">
     <h3>Clicks on Left Page Side</h3>
     <p>
-      Total: <strong>{{ leftSideClickCounter$ | async }} times</strong>
+      Total: <strong>{{ leftSideClickCounter$() }} times</strong>
     </p>
   </div>
   <mat-divider vertical />
   <div class="right-clicks">
     <h3>Clicks on Right Page Side</h3>
     <p>
-      Total: <strong>{{ rightSideClickCounter$ | async }} times</strong>
+      Total: <strong>{{ rightSideClickCounter$() }} times</strong>
     </p>
   </div>
 </section>
 <section class="last-click-tracker">
   <h3>Last Clicked was</h3>
   <p>
-    <strong>"{{ lastSideClicked$ | async | titlecase }}"</strong> Side
+    <strong>"{{ lastSideClicked$() | titlecase }}"</strong> Side
   </p>
 </section>
-@if (stateSavedOnServer$ | async; as serverState) {
+@if (stateSavedOnServer$(); as serverState) {
   @switch (serverState.status) {
     @case ('success') {
       <div class="success-message">

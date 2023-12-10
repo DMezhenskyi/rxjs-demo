@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { catchError, map, retry, startWith, throwError } from 'rxjs';
+import { catchError, map, retry, startWith, tap, throwError } from 'rxjs';
 
 export interface Response {
   message: string;
@@ -30,6 +30,7 @@ export class DataService {
           status: 'success',
           data: response.data
         })),
+        tap(data => console.log('response from http: ', data)),
         retry({
           count: 3,
           delay: 1000
@@ -41,7 +42,8 @@ export class DataService {
         startWith({
           status: 'loading',
           data: null
-        }) 
+        }),
+        
       )
   }
 }

@@ -3,9 +3,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { AsyncPipe, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { Subject, catchError, filter, fromEvent, map, merge, of, pipe, scan, shareReplay, startWith, switchMap, tap, withLatestFrom } from 'rxjs';
 import { DataService } from '../data.service';
+import { toSignal, toObservable } from "@angular/core/rxjs-interop";
 
 @Component({
   standalone: true,
@@ -14,8 +15,7 @@ import { DataService } from '../data.service';
     MatButtonModule,
     MatSlideToggleModule,
     MatProgressBarModule,
-    TitleCasePipe, 
-    AsyncPipe
+    TitleCasePipe
   ],
   templateUrl: './page-click-counter.component.html',
   styleUrl: './page-click-counter.component.scss',
@@ -34,22 +34,22 @@ export class PageClickCounterComponent {
     filter(e => e.clientX > window.innerWidth / 2),
     map(() => 'right')
   );
-  lastSideClicked$ = merge(
+  lastSideClicked$ = toSignal(merge(
     this.leftSideClicks$,
     this.rightSideClicks$
   ).pipe(
     tap(() => this.autoSave && this.saveTrigger.next('autosave')),
     startWith('UNKNOWN')
-  );
-  leftSideClickCounter$ = this.leftSideClicks$.pipe(counter());
-  rightSideClickCounter$ = this.rightSideClicks$.pipe(counter());
+  ));
+  leftSideClickCounter$ = toSignal(this.leftSideClicks$.pipe(counter()), {initialValue: 0});
+  rightSideClickCounter$ = toSignal(this.rightSideClicks$.pipe(counter()), {initialValue: 0});
 
   saveTrigger = new Subject<'manual' | 'autosave'>();
 
-  stateSavedOnServer$ = this.saveTrigger.asObservable().pipe(
+  stateSavedOnServer$ = toSignal(this.saveTrigger.asObservable().pipe(
     withLatestFrom(
-      this.leftSideClickCounter$,
-      this.rightSideClickCounter$
+      toObservable(this.leftSideClickCounter$),
+      toObservable(this.rightSideClickCounter$)
     ),
     switchMap((state) => 
       this.#data.save$(state).pipe(
@@ -57,7 +57,7 @@ export class PageClickCounterComponent {
       )
     ),
     shareReplay()
-  );
+  ));
   
   ngOnInit() {
     
@@ -65,7 +65,6 @@ export class PageClickCounterComponent {
 }
 function counter() {
   return pipe(
-    scan(acc => acc + 1, 0),
-    startWith(0)
+    scan(acc => acc + 1, 0)
   )
 }
