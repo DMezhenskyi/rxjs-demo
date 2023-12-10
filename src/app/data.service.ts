@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { catchError, map, of, retry } from 'rxjs';
+import { catchError, map, of, retry, startWith } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,11 @@ export class DataService {
         catchError(() => of({
           status: 'error',
           data: null
-        }))
+        })),
+        startWith({
+          status: 'loading',
+          data: null
+        })
       )
   }
 }

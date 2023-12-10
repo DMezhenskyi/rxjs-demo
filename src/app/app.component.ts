@@ -21,6 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
         background-color: white;
         padding: 20px;
         border-radius: 12px;
+        position: relative;
+        overflow: hidden;
       }
     `,
   ],

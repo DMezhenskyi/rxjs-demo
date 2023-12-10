@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { Subject, filter, fromEvent, map, merge, pipe, scan, shareReplay, startWith, switchMap, tap, withLatestFrom } from 'rxjs';
@@ -12,6 +13,7 @@ import { DataService } from '../data.service';
     MatDividerModule,
     MatButtonModule,
     MatSlideToggleModule,
+    MatProgressBarModule,
     TitleCasePipe, 
     AsyncPipe
   ],

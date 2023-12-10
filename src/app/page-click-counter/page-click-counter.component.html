@@ -3,7 +3,8 @@
     <h1>Page Click Counter</h1>
     <p>Start clicking around the page...</p>
   </div>
-  <mat-slide-toggle 
+  <mat-slide-toggle
+    (click)="$event.stopPropagation()"
     [checked]="autoSave"
     (change)="autoSave = $event.checked"
   >Auto-Save</mat-slide-toggle>
@@ -63,6 +64,9 @@
           saveTrigger.next('manual')"
         >replay</button>
       </p>
+    }
+    @case ('loading') {
+      <mat-progress-bar class="progress-bar" mode="buffer" />
     }
   }
 }
